@@ -49,7 +49,6 @@ def changePass(pw, ssid):
     'Authorization': 'Bearer ' + webexBearerToken,
     'Content-Type': 'application/json'
     }
-
     #make the API call and save the response into the 'response' variable
     response = requests.request("POST", url, headers=headers, data=payload)
     #evaluate if the response was successful
