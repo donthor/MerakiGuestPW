@@ -6,7 +6,7 @@ import random
 import string
 
 meraki_key = os.environ.get('MERAKI_API_KEY')
-webexBearerToken = "os.environ.get('WEBEX_BEARER_TOKEN')"
+webexBearerToken = os.environ.get('WEBEX_BEARER_TOKEN')
 baseurl = "https://dashboard.meraki.com/api/v0/networks/"
 merakinetwork = os.environ.get('MY_MERAKI_NETWORK')
 
@@ -42,11 +42,11 @@ def changePass(pw, ssid):
     message = f'The new password is {pw}'
     #set the 'url' variable to the webex url
     url = "https://api.ciscospark.com/v1/messages"
-    roomID = "Y2lzY29zcGFyazovL3VzL1JPT00vMmJiYzBjOTAtYWRjYy0xMWViLWEyYmItMzE1ZDJkMTgxMmJj"
+    roomID = <ENTER ROOM ID>
     #define body and header data
     payload="{\r\n  \"roomId\" : \"" + roomID + "\",\r\n  \"text\" : \"" + message + "\"\r\n}"
     headers = {
-    'Authorization': 'Bearer NTI1YWNjYmYtZmQyZS00MTlkLWIzNTAtNzY2NWQxMDRkYzA4MzZkMWVkYTgtYTlm_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f',
+    'Authorization': 'Bearer ' + webexBearerToken,
     'Content-Type': 'application/json'
     }
 
