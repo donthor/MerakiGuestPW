@@ -50,13 +50,14 @@ def changePass(pw, ssid):
     'Content-Type': 'application/json'
     }
     #make the API call and save the response into the 'response' variable
-    response = requests.request("POST", url, headers=headers, data=payload)
-    #evaluate if the response was successful
-    if response.status_code == 200:
-        print("Success!")
-    else:
-        print("Message failed. Code: ", response.status_code)
-        print(response.text)
+    if answer == 'y':
+        response = requests.request("POST", url, headers=headers, data=payload)
+        #evaluate if the response was successful
+        if response.status_code == 200:
+            print("Success!")
+        else:
+            print("Message failed. Code: ", response.status_code)
+            print(response.text)
 
 if __name__ == '__main__':
     changePass()
