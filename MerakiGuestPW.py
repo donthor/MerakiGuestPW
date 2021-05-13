@@ -21,8 +21,7 @@ def changePass(pw, ssid, force, webex):
         pw = ''.join(random.choice(pw_chars) for i in range(8))
     url = baseurl + str(merakinetwork) + '/ssids/'
     payload = json.dumps(
-    {"enabled": False,
-    "psk": pw
+    {"psk": pw
     })
     headers = {
     'X-Cisco-Meraki-API-Key': meraki_key,
