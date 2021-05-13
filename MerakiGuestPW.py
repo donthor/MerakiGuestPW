@@ -28,11 +28,12 @@ def changePass(pw, ssid, force, webex):
     'X-Cisco-Meraki-API-Key': meraki_key,
     'Content-Type': 'application/json'
     }
+    response_get = requests.get(url + str(ssid), headers=headers)
+    data = response_get.json()
+    
     if force:
         response = requests.request("PUT", url + str(ssid), headers=headers, data=payload)
-    else:
-        response_get = requests.get(url + str(ssid), headers=headers)
-        data = response_get.json()
+    else:   
         print(f'Please confirm change to SSID: {data["name"]} with password: {pw}')
         while (answer:=input("Do you want to continue? (Enter y/n)").lower() ) not in {"y", "n"}: pass
         if answer == 'y':
@@ -40,11 +41,11 @@ def changePass(pw, ssid, force, webex):
             # print(response.status_code)
             if response.status_code == 200:
                 click.echo('Password Modified')
-            print(response.text)
+            # print(response.text)
 
-    #Post in Webex
+    #Post in Webex?
     #read input from the user and set it to the 'message' variable
-    message = f'The new password is {pw}'
+    message = f'The new password for SSID {data["name"]} is {pw}'
     #set the 'url' variable to the webex url
     url = "https://api.ciscospark.com/v1/messages"
     roomID = "Y2lzY29zcGFyazovL3VzL1JPT00vMmJiYzBjOTAtYWRjYy0xMWViLWEyYmItMzE1ZDJkMTgxMmJj"
