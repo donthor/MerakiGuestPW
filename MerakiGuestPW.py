@@ -6,9 +6,11 @@ import random
 import string
 
 meraki_key = os.environ.get('MERAKI_API_KEY')
-webexBearerToken = os.environ.get('WEBEX_BEARER_TOKEN')
-baseurl = "https://dashboard.meraki.com/api/v0/networks/"
 merakinetwork = os.environ.get('MY_MERAKI_NETWORK')
+webexBearerToken = os.environ.get('WEBEX_BEARER_TOKEN')
+roomID = os.environ.get('WEBEX_PAROCKHO_BOT')
+baseurl = "https://dashboard.meraki.com/api/v0/networks/"
+
 
 @click.command()
 @click.option('--pw', type=str, default='', help="Password for SSID - use 'random' to generate 8 character password")
@@ -47,7 +49,6 @@ def changePass(pw, ssid, force, webex):
     message = f'The new password for SSID {data["name"]} is {pw}'
     #set the 'url' variable to the webex url
     url = "https://api.ciscospark.com/v1/messages"
-    roomID = "Y2lzY29zcGFyazovL3VzL1JPT00vMmJiYzBjOTAtYWRjYy0xMWViLWEyYmItMzE1ZDJkMTgxMmJj"
     #define body and header data
     payload="{\r\n  \"roomId\" : \"" + roomID + "\",\r\n  \"text\" : \"" + message + "\"\r\n}"
     headers = {
