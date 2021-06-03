@@ -9,8 +9,12 @@ meraki_key = os.environ.get('MERAKI_API_KEY')
 merakinetwork = os.environ.get('MY_MERAKI_NETWORK')
 webexBearerToken = os.environ.get('WEBEX_BEARER_TOKEN')
 roomID = os.environ.get('WEBEX_PAROCKHO_BOT')
-baseurl = "https://dashboard.meraki.com/api/v0/networks/"
+api_ver = 1
 
+if api_ver == 0:
+    baseurl = "https://dashboard.meraki.com/api/v0/networks/"
+elif api_ver == 1:
+    baseurl = "https://dashboard.meraki.com/api/v1/networks/"
 
 @click.command()
 @click.option('--pw', type=str, default='', help="Password for SSID - use 'random' to generate 8 character password")
@@ -21,7 +25,10 @@ def changePass(pw, ssid, force, webex):
     if pw == 'random':
         pw_chars = string.ascii_letters + string.digits
         pw = ''.join(random.choice(pw_chars) for i in range(8))
-    url = baseurl + str(merakinetwork) + '/ssids/'
+    if api_ver == 0:
+        url = baseurl + str(merakinetwork) + '/ssids/'
+    elif api_ver == 1:
+        url = baseurl + str(merakinetwork) + '/wireless/ssids/'
     payload = json.dumps(
     {"psk": pw
     })
@@ -42,10 +49,9 @@ def changePass(pw, ssid, force, webex):
             # print(response.status_code)
             if response.status_code == 200:
                 click.echo('Password Modified')
-            # print(response.text)
 
-    #Post in Webex?
-    #read input from the user and set it to the 'message' variable
+    #Post in Webex using '--webex' option
+    #get SSID and password and set it to the 'message' variable
     message = f'The new password for SSID {data["name"]} is {pw}'
     #set the 'url' variable to the webex url
     url = "https://api.ciscospark.com/v1/messages"
