@@ -28,6 +28,22 @@ Also the following python libraries should be installed
 ```
 pip install -r requirements.txt
 ```
+
+## Variables
+This code calls four variables from the Python `os` library
+1) `meraki_key` is the Meraki Dashboard API key that can be obtained by following this document
+https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API#:~:text=For%20access%20to%20the%20API,to%20generate%20an%20API%20key.
+2) `merakinetwork` is the Network Identifier and can be obtained by following this document
+https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API
+3) `webexBearerToken` is obtained in this document
+https://developer.webex.com/docs/api/getting-started
+4) `roomID` is the identifier for the created Webex room bot and can be obtained through the Rooms API
+https://developer.webex.com/docs/api/v1/rooms
+
+## Creating a Bot
+As we are using a Webex bot to post a message about the new SSID password, further documentation on how to create a bot can be found here
+https://developer.webex.com/docs/bots
+
 ## Example Output
 By running this script, you will input variables to allow quick and easy password changes to a Meraki SSID.
 Once executed you will deploy the changed PSK password across the enviornment
