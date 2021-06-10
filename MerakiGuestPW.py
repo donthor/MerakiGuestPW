@@ -5,6 +5,7 @@ import os
 import click
 import random
 import string
+import sys
 
 meraki_key = os.environ.get('MERAKI_API_KEY')
 merakinetwork = os.environ.get('MY_MERAKI_NETWORK')
@@ -44,6 +45,8 @@ def changePass(pw, ssid, force, webex):
             # print(response.status_code)
             if response.status_code == 200:
                 click.echo('Password Modified')
+        if answer == 'n':
+            sys.exit(0)
 
     #Post in Webex using '--webex' option
     if webex:
