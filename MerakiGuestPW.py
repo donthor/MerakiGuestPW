@@ -14,6 +14,11 @@ roomID = os.environ.get('WEBEX_PAROCKHO_BOT')
 
 baseurl = "https://dashboard.meraki.com/api/v1/networks/"
 
+def randomize_pw():
+    pw_chars = string.ascii_letters + string.digits
+    pw = ''.join(random.choice(pw_chars) for i in range(8))
+    return pw
+
 @click.command()
 @click.option('--pw', type=str, default='', help="Password for SSID - use 'random' to generate 8 character password")
 @click.option('--ssid', type=int, default=14, help="SSID number (0-14)")
@@ -21,8 +26,7 @@ baseurl = "https://dashboard.meraki.com/api/v1/networks/"
 @click.option('--webex/--no-webex', default=False, help="Send new password to Webex room of your choice")
 def changePass(pw, ssid, force, webex):
     if pw == 'random':
-        pw_chars = string.ascii_letters + string.digits
-        pw = ''.join(random.choice(pw_chars) for i in range(8))
+        pw = randomize_pw()
     url = baseurl + str(merakinetwork) + '/wireless/ssids/'
     payload = json.dumps(
     {"psk": pw
